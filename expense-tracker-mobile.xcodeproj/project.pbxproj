@@ -24,9 +24,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F8B3FD5A2E24109500870BF7 /* expense-tracker-mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "expense-tracker-mobile.app"; path = "/Users/korbinhillan/Desktop/Projects/expense-tracker-mobile/build/Debug-iphoneos/expense-tracker-mobile.app"; sourceTree = "<absolute>"; };
-		F8B3FD672E24109600870BF7 /* expense-tracker-mobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "expense-tracker-mobileTests.xctest"; path = "/Users/korbinhillan/Desktop/Projects/expense-tracker-mobile/build/Debug-iphoneos/expense-tracker-mobile.app/PlugIns/expense-tracker-mobileTests.xctest"; sourceTree = "<absolute>"; };
-		F8B3FD712E24109600870BF7 /* expense-tracker-mobileUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "expense-tracker-mobileUITests.xctest"; path = "/Users/korbinhillan/Desktop/Projects/expense-tracker-mobile/build/Debug-iphoneos/expense-tracker-mobileUITests-Runner.app/PlugIns/expense-tracker-mobileUITests.xctest"; sourceTree = "<absolute>"; };
+		F8247B712E5151C700111D4F /* expense-tracker-mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "expense-tracker-mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8247B722E5151C700111D4F /* expense-tracker-mobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "expense-tracker-mobileTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8247B732E5151C700111D4F /* expense-tracker-mobileUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "expense-tracker-mobileUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8247B802E515C4600111D4F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,9 +76,13 @@
 		F8B3FD512E24109500870BF7 = {
 			isa = PBXGroup;
 			children = (
+				F8247B802E515C4600111D4F /* README.md */,
 				F8B3FD5C2E24109500870BF7 /* expense-tracker-mobile */,
 				F8B3FD6A2E24109600870BF7 /* expense-tracker-mobileTests */,
 				F8B3FD742E24109600870BF7 /* expense-tracker-mobileUITests */,
+				F8247B712E5151C700111D4F /* expense-tracker-mobile.app */,
+				F8247B722E5151C700111D4F /* expense-tracker-mobileTests.xctest */,
+				F8247B732E5151C700111D4F /* expense-tracker-mobileUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,7 +108,7 @@
 			packageProductDependencies = (
 			);
 			productName = "expense-tracker-mobile";
-			productReference = F8B3FD5A2E24109500870BF7 /* expense-tracker-mobile.app */;
+			productReference = F8247B712E5151C700111D4F /* expense-tracker-mobile.app */;
 			productType = "com.apple.product-type.application";
 		};
 		F8B3FD662E24109600870BF7 /* expense-tracker-mobileTests */ = {
@@ -126,7 +131,7 @@
 			packageProductDependencies = (
 			);
 			productName = "expense-tracker-mobileTests";
-			productReference = F8B3FD672E24109600870BF7 /* expense-tracker-mobileTests.xctest */;
+			productReference = F8247B722E5151C700111D4F /* expense-tracker-mobileTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		F8B3FD702E24109600870BF7 /* expense-tracker-mobileUITests */ = {
@@ -149,7 +154,7 @@
 			packageProductDependencies = (
 			);
 			productName = "expense-tracker-mobileUITests";
-			productReference = F8B3FD712E24109600870BF7 /* expense-tracker-mobileUITests.xctest */;
+			productReference = F8247B732E5151C700111D4F /* expense-tracker-mobileUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
