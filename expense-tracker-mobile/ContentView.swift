@@ -26,8 +26,8 @@ struct ContentView: View {
             )
         case .signUp:
             SignUpView(
-                onFinished: { screen = .home },
-                onCancel: { screen = .signIn }
+                onSignUp: { screen = .home },
+                onTapSignIn: { screen = .signIn }
             )
         case .home:
             HomeView(onSignOut: { screen = .signIn })
@@ -190,18 +190,154 @@ struct SignInView: View {
 }
 
 struct SignUpView: View {
-    var onFinished: () -> Void = {}
-    var onCancel: () -> Void = {}
+    var onSignUp: () -> Void = {}
+    var onTapSignIn: () -> Void = {}
+    
+    @State private var email = ""
+    @State private var password = ""
+    
     var body: some View {
-        VStack(spacing: 20) {
-            Text("Sign Up").font(.largeTitle.bold())
-            Button("Finish Sign Up") { onFinished() }
-            Button("Cancel") { onCancel() }
+        ZStack {
+            LinearGradient(
+                gradient: Gradient(stops: [
+                    .init(color: Color(hex: "#36D1DC"), location: 0.0),
+                    .init(color: Color(hex: "#2AB8E6"), location: 0.5),
+                    .init(color: Color(hex: "#5B86E5"), location: 1.0)
+                ]),
+                startPoint: UnitPoint(x: -0.25, y: 1.0),
+                endPoint: UnitPoint(x: -0.25, y: 0)
+            )
+            .ignoresSafeArea()
+            
+            VStack(spacing: 16) {
+                Text("Create Account")
+                    .foregroundColor(.white)
+                    .font(.largeTitle.bold())
+                    .multilineTextAlignment(.center)
+                
+                Spacer().frame(height: 50)
+
+                TextField(text: $email, prompt: Text("Email").foregroundColor(Color(.secondaryLabel))
+                ) {}
+                .foregroundStyle(Color(.label))
+                .textInputAutocapitalization(.never)
+                .disableAutocorrection(true)
+                .font(.system(size: 18))
+                .padding(.horizontal, 16)
+                .frame(height: 54)
+                .background(Color(.secondarySystemBackground))
+                .cornerRadius(10)
+
+                SecureField("", text: $password, prompt: Text("Password")
+                        .foregroundColor(Color(.secondaryLabel)))
+                .foregroundStyle(Color(.label))
+                .textInputAutocapitalization(.never)
+                .disableAutocorrection(true)
+                .font(.system(size: 18))
+                .padding(.horizontal, 16)
+                .frame(height: 54)
+                .background(Color(.secondarySystemBackground))
+                .cornerRadius(10)
+                
+                Button(action: {
+                    // Apple sign in
+                    onSignUp()
+                }) {
+                    HStack {
+                        Text("Sign Up")
+                            .font(.system(size: 24, weight: .semibold))
+                    }
+                    .frame(width: 354, height: 54)
+                    .background(Color(hex: "#E0D500"))
+                    .foregroundColor(.black)
+                    .cornerRadius(.infinity)
+                }
+                
+                HStack {
+                    Divider()
+                        .frame(width: 100, height: 1)
+                        .background(Color.white)
+
+                    Text("OR")
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 8)
+                        .font(.system(size: 18))
+
+                    Divider()
+                        .frame(width: 100, height: 1)
+                        .background(Color.white)
+                }
+                Button(action: {
+                    // Apple sign in
+                }) {
+                    HStack {
+                        Image("facebook")
+                            .renderingMode(.original)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 40, height: 40)
+
+                        Text("Sign Up with Facebook")
+                            .font(.system(size: 24, weight: .semibold))
+                    }
+                    .frame(width: 354, height: 61)
+                    .background(.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(16)
+                }
+                Button(action: {
+                    // Apple sign in
+                }) {
+                    HStack {
+                        Image("google")
+                            .renderingMode(.original)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 40, height: 40)
+
+                        Text("Sign Up with Google")
+                            .font(.system(size: 24, weight: .semibold))
+                    }
+                    .frame(width: 354, height: 61)
+                    .background(.white)
+                    .foregroundColor(.black)
+                    .cornerRadius(16)
+                }
+                Button(action: {
+                    // Apple sign in
+                }) {
+                    HStack {
+                        Image(systemName: "apple.logo")
+                            .font(.system(size: 40))
+
+                        Text("Sign Up with Apple")
+                            .font(.system(size: 24, weight: .semibold))
+                    }
+                    .frame(width: 354, height: 61)
+                    .background(.black)
+                    .foregroundColor(.white)
+                    .cornerRadius(16)
+                }
+                Spacer()
+                    .frame(height: 10)
+                VStack(spacing: 4) {
+                    Text("Already have an account?")
+                        
+                    Button(action: {
+                        onTapSignIn()
+                    }) {
+                        Text("Sign In")
+                            .font(.system(size: 18, weight: .bold))
+                            .foregroundColor(.white)
+                            .underline()
+                    }
+                }
+            }
+            .frame(width: 354)
+            .padding()
         }
-        .padding()
     }
 }
-
 struct HomeView: View {
     var onSignOut: () -> Void = {}
     var body: some View {
