@@ -15,48 +15,129 @@ struct UserProfile: Decodable {
     let provider: String?
 }
 
+private enum Screen {
+    case Home
+    case Stats
+    case Bills
+    case Recent
+    case Profile
+}
+
 struct UserProfileResponse: Decodable {
     let user: UserProfile
 }
 
-struct HomeView: View {
+struct AppView: View {
+    @State private var screen: Screen = .Home
     var onSignOut: () -> Void = {}
+    var body: some View {
+        switch screen {
+        case .Home:
+            HomeView()
+        case .Stats:
+            StatsView()
+        case .Bills:
+            BillsView()
+        case .Recent:
+            RecentView()
+        case .Profile:
+            ProfileView()
+        }
+        HomeNavBar(screen: $screen)
+    }
+}
+
+struct HomeView: View {
+    var body: some View {
+        Text("HomeView")
+    }
+}
+
+struct ProfileView: View {
+    var body: some View {
+        Text("Profile")
+    }
+}
+
+struct StatsView: View {
+    var body: some View {
+        Text("StatsView")
+    }
+}
+
+struct BillsView: View {
+    var body: some View {
+        Text("BillsView")
+    }
+}
+
+struct RecentView: View {
+    var body: some View {
+        Text("RecentView")
+    }
+}
+
+private struct NavTile: View {
+    let systemName: String
+    let title: String
+    let action: () -> Void
+    
+    var body: some View {
+        Button(action: action) {
+            VStack(spacing: 6) {
+                Image(systemName: systemName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 22)
+                Text(title)
+                    .font(.caption)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+            }
+            .frame(width: 45, height: 45)
+            .padding(6)
+            .background(Color.blue)
+            .cornerRadius(15)
+            .foregroundStyle(.white)
+            .contentShape(RoundedRectangle(cornerRadius: 15))
+        }
+        .buttonStyle(.plain)
+    }
+}
+
+struct HomeNavBar: View {
+    @Binding fileprivate var screen: Screen
     @State private var profile: UserProfile?
     @State private var isLoading = true
     @State private var errorMessage: String?
+    
     var body: some View {
-        VStack(spacing: 20) {
-            Text("Home").font(.largeTitle.bold())
-            if isLoading {
-                ProgressView("Loading profile…")
-            } else if let errorMessage {
-                Text(errorMessage).foregroundColor(.red)
-            } else if let p = profile {
-                VStack(spacing: 6) {
-                    Text(p.name ?? "Guest").font(.title2.weight(.semibold))
-                    Text(p.email ?? "No email").foregroundStyle(.secondary)
-                    Text("ID: \(p.id)").font(.footnote.monospaced())
-                }
-            }
-            Button("Sign Out") {
-                onSignOut()
-                Auth0
-                    .webAuth()
-                    .useHTTPS() // Use a Universal Link logout URL on iOS 17.4+ / macOS 14.4+
-                    .clearSession { result in
-                        switch result {
-                        case .success:
-                            print("Logged out")
-                        case .failure(let error):
-                            print("Failed with: \(error)")
-                        }
+        ZStack(alignment: .topTrailing) {
+            LinearGradient(colors: [Color(hex: "#36D1DC"), Color(hex: "#5B86E5")],
+                           startPoint: .topLeading, endPoint: .bottomTrailing)
+            .ignoresSafeArea()
+        }
+            
+            VStack(spacing: 20) {
+                HStack(spacing: 12) {
+                    NavTile(systemName: "house", title: "Home") {
+                        screen = .Home
                     }
-            }
+                    NavTile(systemName: "chart.bar", title: "Stats") {
+                        screen = .Stats
+                    }
+                    NavTile(systemName: "creditcard", title: "Bills") {
+                        screen = .Bills
+                    }
+                    NavTile(systemName: "clock", title: "Recent") {
+                        screen = .Recent
+                    }
+                    NavTile(systemName: "person.crop.circle", title: "Profile") {
+                        screen = .Profile
+                    }
+                }
         }
-        .padding()
-        .task {
-            await loadProfile()
-        }
+            .task { await loadProfile() }
     }
     
     @MainActor
@@ -71,4 +152,8 @@ struct HomeView: View {
         }
         isLoading = false
     }
+}
+
+#Preview {
+    AppView()
 }

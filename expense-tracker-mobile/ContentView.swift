@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum Screen {
+private enum Screen {
     case signIn
     case home
 }
@@ -20,11 +20,10 @@ struct ContentView: View {
         case .signIn:
             LandingView(onAuthenticated: { screen = .home })
         case .home:
-            HomeView(onSignOut: { screen = .signIn })
+            AppView()
         }
     }
 }
-
 #Preview {
     ContentView()
 }
