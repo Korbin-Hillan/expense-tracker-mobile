@@ -1,0 +1,5 @@
+#import <Foundation/Foundation.h>
+@interface PodsDummy_Pods_expense_tracker_mobile_expense_tracker_mobileUITests : NSObject
+@end
+@implementation PodsDummy_Pods_expense_tracker_mobile_expense_tracker_mobileUITests
+@end

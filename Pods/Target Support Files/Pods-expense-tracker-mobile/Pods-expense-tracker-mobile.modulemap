@@ -1,0 +1,6 @@
+framework module Pods_expense_tracker_mobile {
+  umbrella header "Pods-expense-tracker-mobile-umbrella.h"
+
+  export *
+  module * { export * }
+}
